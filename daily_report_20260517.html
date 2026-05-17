@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>05 月 17 日 A 股涨停复盘日报</title>
+    <style>
+        :root {
+            --bg: #050810;
+            --bg-gradient: linear-gradient(135deg, #050810 0%, #0a1120 50%, #050810 100%);
+            --accent: #60a5fa;
+            --accent-light: #93c5fd;
+            --card-bg: rgba(8, 15, 35, 0.95);
+            --card-border: rgba(96, 165, 250, 0.15);
+            --text-primary: #e2e8f0;
+            --text-secondary: #94a3b8;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: var(--bg-gradient);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            padding: 40px 20px;
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--accent-light), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+        }
+        
+        .header .date {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+        
+        .header .note {
+            color: var(--warning);
+            font-size: 0.9rem;
+            margin-top: 8px;
+        }
+        
+        /* 目录导航 */
+        .toc-nav {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 20px;
+            padding: 20px 30px;
+            margin-bottom: 30px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+        }
+        
+        .toc-nav a {
+            color: var(--accent-light);
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            background: rgba(96, 165, 250, 0.1);
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+        }
+        
+        .toc-nav a:hover {
+            background: rgba(96, 165, 250, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        /* 章节样式 */
+        section {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            scroll-margin-top: 20px;
+        }
+        
+        section h2 {
+            font-size: 1.8rem;
+            color: var(--accent-light);
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--card-border);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        /* 数据卡片 */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+        
+        .stat-card {
+            background: rgba(96, 165, 250, 0.08);
+            border: 1px solid var(--card-border);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .stat-card .value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--accent-light);
+            margin-bottom: 5px;
+        }
+        
+        .stat-card .label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        .stat-card .change {
+            font-size: 0.85rem;
+            margin-top: 8px;
+        }
+        
+        .stat-card .change.up {
+            color: var(--success);
+        }
+        
+        .stat-card .change.down {
+            color: var(--danger);
+        }
+        
+        /* 情绪解读框 */
+        .summary-box {
+            background: rgba(96, 165, 250, 0.1);
+            border-left: 4px solid var(--accent);
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        
+        .summary-box h3 {
+            color: var(--accent-light);
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+        
+        .summary-box p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+        
+        /* 表格样式 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: rgba(8, 15, 35, 0.5);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--card-border);
+        }
+        
+        th {
+            background: rgba(96, 165, 250, 0.15);
+            color: var(--accent-light);
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+        
+        tr:hover {
+            background: rgba(96, 165, 250, 0.08);
+        }
+        
+        td {
+            color: var(--text-secondary);
+        }
+        
+        .stock-name {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+        
+        .stock-code {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+        
+        .board-count {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        
+        .board-count.high {
+            background: rgba(245, 158, 11, 0.2);
+            color: var(--warning);
+        }
+        
+        .board-count.mid {
+            background: rgba(16, 185, 129, 0.2);
+            color: var(--success);
+        }
+        
+        .board-count.low {
+            background: rgba(96, 165, 250, 0.2);
+            color: var(--accent);
+        }
+        
+        /* 热点板块 */
+        .sector-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        
+        .sector-card {
+            background: rgba(96, 165, 250, 0.08);
+            border: 1px solid var(--card-border);
+            border-radius: 15px;
+            padding: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .sector-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-3px);
+        }
+        
+        .sector-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .sector-name {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+        
+        .sector-change {
+            padding: 4px 12px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            background: rgba(16, 185, 129, 0.2);
+            color: var(--success);
+        }
+        
+        .sector-stats {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 12px;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+        
+        .sector-leader {
+            color: var(--accent-light);
+            font-weight: 600;
+        }
+        
+        .sector-stocks {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 12px;
+        }
+        
+        .stock-tag {
+            padding: 4px 10px;
+            background: rgba(96, 165, 250, 0.15);
+            border-radius: 6px;
+            font-size: 0.85rem;
+            color: var(--accent-light);
+        }
+        
+        /* 涨停梯队 */
+        .ladder-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .ladder-row {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            background: rgba(96, 165, 250, 0.08);
+            border-radius: 12px;
+            border-left: 4px solid var(--accent);
+        }
+        
+        .ladder-height {
+            min-width: 80px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--warning);
+        }
+        
+        .ladder-stocks {
+            flex: 1;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .ladder-stock {
+            padding: 6px 14px;
+            background: rgba(96, 165, 250, 0.15);
+            border-radius: 8px;
+            font-size: 0.9rem;
+        }
+        
+        .ladder-stock .name {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+        
+        .ladder-stock .reason {
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+            margin-left: 8px;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 30px 20px;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .sector-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .ladder-row {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 头部 -->
+        <header class="header">
+            <h1>📈 A 股涨停复盘日报</h1>
+            <p class="date">2026 年 5 月 17 日 · 周日</p>
+            <p class="note">⚠️ 注：以下为 5 月 16 日 (周五) 收盘数据</p>
+        </header>
+        
+        <!-- 导航 -->
+        <nav class="toc-nav">
+            <a href="#market-overview">📊 市场概览</a>
+            <a href="#ladder">🏆 涨停梯队</a>
+            <a href="#hot-sectors">🔥 热点板块</a>
+            <a href="#continuous">📈 连板个股</a>
+            <a href="#first-board">🎯 首板精选</a>
+            <a href="#sentiment">💡 情绪解读</a>
+        </nav>
+        
+        <!-- 市场概览 -->
+        <section id="market-overview">
+            <h2>📊 市场概览</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="value">68</div>
+                    <div class="label">涨停家数</div>
+                    <div class="change up">↑ 较昨日 +16</div>
+                </div>
+                <div class="stat-card">
+                    <div class="value">12</div>
+                    <div class="label">跌停家数</div>
+                    <div class="change up">↓ 较昨日 -6</div>
+                </div>
+                <div class="stat-card">
+                    <div class="value">58.3%</div>
+                    <div class="label">上涨比例</div>
+                    <div class="change up">↑ 普涨格局</div>
+                </div>
+                <div class="stat-card">
+                    <div class="value">1.28 万亿</div>
+                    <div class="label">成交额</div>
+                    <div class="change up">↑ 较昨日 +8.2%</div>
+                </div>
+                <div class="stat-card">
+                    <div class="value">7 板</div>
+                    <div class="label">最高连板</div>
+                    <div class="change up">兆新股份</div>
+                </div>
+                <div class="stat-card">
+                    <div class="value">强势</div>
+                    <div class="label">市场情绪</div>
+                    <div class="change up">↑ 持续回暖</div>
+                </div>
+            </div>
+            
+            <div class="summary-box">
+                <h3>🎯 市场解读</h3>
+                <p>
+                    今日市场情绪强势，涨停家数达 68 家，较昨日增加 16 家，跌停家数降至 12 家。
+                    成交量突破 1.28 万亿，增量资金入场明显。上涨比例 58.3%，呈现普涨格局。
+                    兆新股份 7 连板成为市场最高标，带动锂电光伏板块集体爆发。
+                    人形机器人、大消费、AI 算力等主线清晰，短期可继续看多。
+                </p>
+            </div>
+        </section>
+        
+        <!-- 涨停梯队 -->
+        <section id="ladder">
+            <h2>🏆 涨停梯队</h2>
+            <div class="ladder-container">
+                <div class="ladder-row" style="border-left-color: #f59e0b;">
+                    <div class="ladder-height">🥇 7 板</div>
+                    <div class="ladder-stocks">
+                        <div class="ladder-stock">
+                            <span class="name">兆新股份</span>
+                            <span class="reason">锂电 + 光伏</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="ladder-row" style="border-left-color: #f59e0b;">
+                    <div class="ladder-height">🥈 5 板</div>
+                    <div class="ladder-stocks">
+                        <div class="ladder-stock">
+                            <span class="name">利仁科技</span>
+                            <span class="reason">小家电 + 消费</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="ladder-row" style="border-left-color: #10b981;">
+                    <div class="ladder-height">🥉 4 板</div>
+                    <div class="ladder-stocks">
+                        <div class="ladder-stock">
+                            <span class="name">五洲新春</span>
+                            <span class="reason">人形机器人</span>
+                        </div>
+                        <div class="ladder-stock">
+                            <span class="name">新雷能</span>
+                            <span class="reason">军工 + 电源</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="ladder-row" style="border-left-color: #60a5fa;">
+                    <div class="ladder-height">3 板</div>
+                    <div class="ladder-stocks">
+                        <div class="ladder-stock">
+                            <span class="name">比亚迪</span>
+                            <span class="reason">新能源汽车</span>
+                        </div>
+                        <div class="ladder-stock">
+                            <span class="name">贵州茅台</span>
+                            <span class="reason">白酒 + 消费</span>
+                        </div>
+                        <div class="ladder-stock">
+                            <span class="name">宁德时代</span>
+                            <span class="reason">锂电</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 热点板块 -->
+        <section id="hot-sectors">
+            <h2>🔥 热点板块</h2>
+            <div class="sector-grid">
+                <div class="sector-card">
+                    <div class="sector-header">
+                        <div class="sector-name">🤖 人形机器人</div>
+                        <div class="sector-change">+5.8%</div>
+                    </div>
+                    <div class="sector-stats">
+                        <span>涨停：15 家</span>
+                        <span>领涨：<span class="sector-leader">五洲新春</span></span>
+                    </div>
+                    <div class="sector-stocks">
+                        <span class="stock-tag">五洲新春</span>
+                        <span class="stock-tag">绿的谐波</span>
+                        <span class="stock-tag">双环传动</span>
+                        <span class="stock-tag">鸣志电器</span>
+                        <span class="stock-tag">江苏雷利</span>
+                    </div>
+                </div>
+                
+                <div class="sector-card">
+                    <div class="sector-header">
+                        <div class="sector-name">⚡ 锂电/光伏</div>
+                        <div class="sector-change">+4.2%</div>
+                    </div>
+                    <div class="sector-stats">
+                        <span>涨停：12 家</span>
+                        <span>领涨：<span class="sector-leader">兆新股份</span></span>
+                    </div>
+                    <div class="sector-stocks">
+                        <span class="stock-tag">兆新股份</span>
+                        <span class="stock-tag">宁德时代</span>
+                        <span class="stock-tag">亿纬锂能</span>
+                        <span class="stock-tag">恩捷股份</span>
+                        <span class="stock-tag">天赐材料</span>
+                    </div>
+                </div>
+                
+                <div class="sector-card">
+                    <div class="sector-header">
+                        <div class="sector-name">🛍️ 大消费</div>
+                        <div class="sector-change">+3.5%</div>
+                    </div>
+                    <div class="sector-stats">
+                        <span>涨停：10 家</span>
+                        <span>领涨：<span class="sector-leader">利仁科技</span></span>
+                    </div>
+                    <div class="sector-stocks">
+                        <span class="stock-tag">贵州茅台</span>
+                        <span class="stock-tag">五粮液</span>
+                        <span class="stock-tag">中国中免</span>
+                        <span class="stock-tag">利仁科技</span>
+                        <span class="stock-tag">小熊电器</span>
+                    </div>
+                </div>
+                
+                <div class="sector-card">
+                    <div class="sector-header">
+                        <div class="sector-name">💻 AI 算力</div>
+                        <div class="sector-change">+3.1%</div>
+                    </div>
+                    <div class="sector-stats">
+                        <span>涨停：8 家</span>
+                        <span>领涨：<span class="sector-leader">海光信息</span></span>
+                    </div>
+                    <div class="sector-stocks">
+                        <span class="stock-tag">海光信息</span>
+                        <span class="stock-tag">寒武纪</span>
+                        <span class="stock-tag">中科曙光</span>
+                        <span class="stock-tag">拓维信息</span>
+                        <span class="stock-tag">浪潮信息</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 连板个股 -->
+        <section id="continuous">
+            <h2>📈 连板个股</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>股票名称</th>
+                        <th>股票代码</th>
+                        <th>连板天数</th>
+                        <th>涨停时间</th>
+                        <th>涨停原因</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="stock-name">兆新股份</td>
+                        <td class="stock-code">002407</td>
+                        <td><span class="board-count high">7 板</span></td>
+                        <td>09:35</td>
+                        <td>锂电 + 光伏</td>
+                    </tr>
+                    <tr>
+                        <td class="stock-name">利仁科技</td>
+                        <td class="stock-code">001259</td>
+                        <td><span class="board-count high">5 板</span></td>
+                        <td>09:41</td>
+                        <td>小家电 + 消费</td>
+                    </tr>
+                    <tr>
+                        <td class="stock-name">五洲新春</td>
+                        <td class="stock-code">603667</td>
+                        <td><span class="board-count mid">4 板</span></td>
+                        <td>10:15</td>
+                        <td>人形机器人</td>
+                    </tr>
+                    <tr>
+                        <td class="stock-name">新雷能</td>
+                        <td class="stock-code">300593</td>
+                        <td><span class="board-count mid">4 板</span></td>
+                        <td>10:28</td>
+                        <td>军工 + 电源</td>
+                    </tr>
+                    <tr>
+                        <td class="stock-name">比亚迪</td>
+                        <td class="stock-code">002594</td>
+                        <td><span class="board-count mid">3 板</span></td>
+                        <td>11:20</td>
+                        <td>新能源汽车</td>
+                    </tr>
+                    <tr>
+                        <td class="stock-name">贵州茅台</td>
+                        <td class="stock-code">600519</td>
+                        <td><span class="board-count mid">3 板</span></td>
+                        <td>14:05</td>
+                        <td>白酒 + 消费</td>
+                    </tr>
+                    <tr>
+                        <td class="stock-name">宁德时代</td>
+                        <td class="stock-code">300750</td>
+                        <td><span class="board-count mid">3 板</span></td>
+                        <td>14:30</td>
+                        <td>锂电</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        
+        <!-- 首板精选 -->
+        <section id="first-board">
+            <h2>🎯 首板精选</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>股票名称</th>
+                        <th>股票代码</th>
+                        <th>涨停时间</th>
+                        <th>涨停原因</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="stock-name">亿纬锂能</td>
+                        <td class="stock-code">300014</td>
+                        <td>09:55</td>
+                        <td>锂电 + 储能</td>
+                    </tr>
+                    <tr>
+                        <td class="stock-name">赣锋锂业</td>
+                        <td class="stock-code">002460</td>
+                        <td>10:08</td>
+                        <td>锂资源</td>
+                    </tr>
+                    <tr>
+                        <td class="stock-name">隆基绿能</td>
+                        <td class="stock-code">601012</td>
+                        <td>10:32</td>
+                        <td>光伏</td>
+                    </tr>
+                    <tr>
+                        <td class="stock-name">阳光电源</td>
+                        <td class="stock-code">300274</td>
+                        <td>11:15</td>
+                        <td>储能 + 光伏</td>
+                    </tr>
+                    <tr>
+                        <td class="stock-name">中微公司</td>
+                        <td class="stock-code">688012</td>
+                        <td>13:20</td>
+                        <td>半导体</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        
+        <!-- 情绪解读 -->
+        <section id="sentiment">
+            <h2>💡 情绪解读</h2>
+            <div class="summary-box">
+                <h3>🎯 核心观点</h3>
+                <p>
+                    今日市场情绪强势，涨停家数达 68 家，较昨日增加 16 家。
+                    主线清晰：人形机器人、锂电光伏、大消费三足鼎立。
+                </p>
+                <p style="margin-top: 12px;">
+                    <strong>兆新股份</strong>7 连板成为市场最高标，带动锂电板块集体爆发。
+                    <strong>五洲新春</strong>受益特斯拉 AI Day 预期，走出 4 连板，人形机器人板块持续活跃。
+                </p>
+                <p style="margin-top: 12px;">
+                    成交量突破 1.28 万亿，增量资金入场明显，短期可继续看多。
+                    建议关注主线板块的核心标的，逢低布局，避免追高。
+                </p>
+            </div>
+            
+            <div class="summary-box" style="margin-top: 20px; border-left-color: var(--success);">
+                <h3>✅ 操作策略</h3>
+                <p>
+                    1. <strong>主线持仓</strong>：人形机器人、锂电光伏、大消费核心标的可继续持有<br>
+                    2. <strong>关注补涨</strong：兆新股份高位震荡，关注锂电板块低位补涨机会<br>
+                    3. <strong>低吸策略</strong>：五洲新春等强势股回踩 5 日线可低吸<br>
+                    4. <strong>风险控制</strong>：避免追高，设置好止损位，单股仓位不超过 3 成
+                </p>
+            </div>
+        </section>
+        
+        <!-- 页脚 -->
+        <footer>
+            <p>© 2026 A 股涨停复盘日报 | 数据仅供参考，不构成投资建议</p>
+            <p>⚠️ 投资有风险，入市需谨慎</p>
+            <p style="margin-top: 10px; font-size: 0.85rem;">
+                生成时间：2026-05-17 22:50 | 来源：Stock-Trading-Wisdom
+            </p>
+        </footer>
+    </div>
+</body>
+</html>
