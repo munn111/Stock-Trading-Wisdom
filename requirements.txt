@@ -1,0 +1,5 @@
+
+baostock>=0.8.8
+pandas>=1.5.0
+akshare>=1.10.0  # 备用数据源
+matplotlib>=3.6.0  # 可视化
