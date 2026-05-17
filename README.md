@@ -1,27 +1,62 @@
-# 📈 Stock Trading Wisdom (股票交易智慧库)
+# 📈 Stock Trading Wisdom (股票交易智慧库) v2.0
 
-> **核心理念**：市场是情绪的集合，技术是情绪的载体。不预测，只跟随；不抄底，只确认。
-> **来源**：基于 AI 助手在 A 股市场的深度复盘与策略演化总结。
+> **核心理念**：市场是情绪的集合，技术是情绪的载体。不预测，只跟随；不博弈，只确认。
+> **架构灵感**：深度参考 [a-stock-data](https://github.com/simonlin1212/a-stock-data) 的 6 层数据架构，实现从"文档"到"可执行系统"的升级。
 
-## 📚 目录结构
+---
 
-- **methods/**: 核心交易战法（涨停、缺口、龙头、趋势）。
-- **memory/**: 市场记忆与情绪周期复盘逻辑。
-- **skills/**: 分析技能与工具使用 SOP（标准作业程序）。
-- **examples/**: 经典实战案例推演（基于历史数据）。
+## 🏗️ 系统架构 (6-Layer Architecture)
 
-## 🔥 核心战法预览
+借鉴专业量化系统，本项目分为以下 6 层：
 
-1. **涨停回马枪**：涨停后缩量回调至 5 日/10 日线，企稳反包。
-2. **缺口理论**：突破缺口不补，强势延续；衰竭缺口必补，趋势反转。
-3. **龙头战法**：只做板块最强，只买分歧转一致，不做跟风。
-4. **情绪周期**：冰点试错 -> 发酵加仓 -> 高潮持股 -> 退潮空仓。
+| 层级 | 模块 | 功能描述 |
+|:---|:---|:---|
+| **L1: Data Source** | `data_engine/` | 整合 Baostock, AkShare, Tushare 等 8 大源，自动容错切换 |
+| **L2: Data Clean** | `data_engine/cleaner.py` | 清洗原始数据，统一字段格式 (open, close, volume) |
+| **L3: Factor** | `utils/factors.py` | 计算技术指标 (MA, MACD, 涨停标记, 缺口检测) |
+| **L4: Signal** | `strategies/` | **核心战法引擎**：涨停回马枪、缺口理论、龙头战法 |
+| **L5: Portfolio** | `portfolio/` | 仓位管理，风险控制 (待实现) |
+| **L6: Execution** | `main.py` | 信号输出，交易建议生成 (待实现) |
 
-## 🛠️ 使用方法
+---
 
-本仓库为静态知识库，建议结合实时行情软件使用。
-所有策略需配合**严格止损**（通常为 -5% 或跌破关键支撑）。
+## 📚 核心内容
 
-## 📜 许可证
+### 1. 交易战法 (`methods/`)
+- **涨停板战法**：回马枪、连板接力、首板挖掘
+- **缺口理论**：突破缺口、中继缺口、衰竭缺口
+- **龙头战法**：生命周期、情绪周期、操作纪律
 
-MIT License - 仅供学习交流，不构成投资建议。
+### 2. 策略引擎 (`strategies/`)
+- `LimitUpStrategy`: 涨停回马枪自动扫描
+- `GapStrategy`: 缺口检测与回补判断
+- `LeaderStrategy`: 板块龙头识别
+
+### 3. 数据引擎 (`data_engine/`)
+- 多源自动切换，确保数据永不中断
+- 智能交易日判断 (周末/节假日自动回退)
+
+---
+
+## 🚀 快速开始
+
+```python
+from data_engine.loader import StockDataEngine
+from strategies.core_strategies import run_strategy
+
+# 1. 初始化数据引擎
+engine = StockDataEngine()
+
+# 2. 获取数据
+data = engine.fetch_all_stocks("2026-05-15")
+
+# 3. 运行策略
+strategy = run_strategy("limit_up", data)
+strategy.check_pattern("sh.603667")  # 五洲新春
+```
+
+## 📝 经典案例
+- [五洲新春 2026 年 5 月走势推演](examples/case_wuzhou.md)
+
+## 🔐 安全提示
+本项目仅供学习交流，不构成投资建议。股市有风险，入市需谨慎。
