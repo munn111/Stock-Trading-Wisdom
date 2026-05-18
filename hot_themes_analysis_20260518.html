@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>今日热门题材深度分析 - 2026 年 5 月 18 日</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            color: #e0e0e0;
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        .container { max-width: 1200px; margin: 0 auto; }
+        h1 {
+            text-align: center;
+            color: #00d9ff;
+            font-size: 2.2em;
+            margin-bottom: 10px;
+            text-shadow: 0 0 20px rgba(0, 217, 255, 0.5);
+        }
+        .date { text-align: center; color: #8892b0; margin-bottom: 30px; font-size: 1.1em; }
+        .market-overview {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 30px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .stat-card {
+            text-align: center;
+            padding: 15px;
+            background: rgba(0, 217, 255, 0.1);
+            border-radius: 8px;
+            border-left: 3px solid #00d9ff;
+        }
+        .stat-value { font-size: 1.8em; font-weight: bold; color: #00d9ff; }
+        .stat-label { color: #8892b0; font-size: 0.9em; margin-top: 5px; }
+        .section {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .section-title {
+            font-size: 1.5em;
+            color: #00d9ff;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid rgba(0, 217, 255, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .tier-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+        .tier-1 { background: linear-gradient(135deg, #ffd700, #ffaa00); color: #000; }
+        .tier-2 { background: linear-gradient(135deg, #c0c0c0, #a0a0a0); color: #000; }
+        .tier-3 { background: linear-gradient(135deg, #cd7f32, #b87333); color: #fff; }
+        .stock-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        .stock-table th, .stock-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .stock-table th {
+            background: rgba(0, 217, 255, 0.15);
+            color: #00d9ff;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.85em;
+        }
+        .stock-table tr:hover {
+            background: rgba(0, 217, 255, 0.08);
+            transition: all 0.3s ease;
+        }
+        .stock-name { font-weight: 600; color: #fff; }
+        .stock-code { color: #8892b0; font-size: 0.9em; }
+        .rank-badge {
+            display: inline-block;
+            width: 28px;
+            height: 28px;
+            line-height: 28px;
+            text-align: center;
+            border-radius: 50%;
+            font-weight: bold;
+            font-size: 0.9em;
+        }
+        .rank-1 { background: linear-gradient(135deg, #ffd700, #ffaa00); color: #000; }
+        .rank-2 { background: linear-gradient(135deg, #c0c0c0, #a0a0a0); color: #000; }
+        .rank-3 { background: linear-gradient(135deg, #cd7f32, #b87333); color: #fff; }
+        .rank-4, .rank-5 { background: rgba(255, 255, 255, 0.2); color: #fff; }
+        .strength-bar {
+            width: 100%;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 5px;
+        }
+        .strength-fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.5s ease;
+        }
+        .strength-high { background: linear-gradient(90deg, #00ff88, #00d9ff); }
+        .strength-medium { background: linear-gradient(90deg, #ffd700, #ffaa00); }
+        .strength-low { background: linear-gradient(90deg, #ff6b6b, #ff5252); }
+        .logic-box {
+            background: rgba(0, 217, 255, 0.08);
+            border-left: 4px solid #00d9ff;
+            padding: 15px 20px;
+            margin-bottom: 20px;
+            border-radius: 0 8px 8px 0;
+        }
+        .logic-title { color: #00d9ff; font-weight: 600; margin-bottom: 8px; }
+        .strategy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .strategy-card {
+            background: rgba(0, 217, 255, 0.08);
+            border: 1px solid rgba(0, 217, 255, 0.2);
+            border-radius: 10px;
+            padding: 20px;
+            transition: all 0.3s ease;
+        }
+        .strategy-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 217, 255, 0.2);
+        }
+        .strategy-title {
+            font-size: 1.2em;
+            color: #00d9ff;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .strategy-list { list-style: none; }
+        .strategy-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            color: #b0b8c4;
+        }
+        .strategy-list li:last-child { border-bottom: none; }
+        .highlight { color: #00ff88; font-weight: 600; }
+        .warning { color: #ffd700; font-weight: 600; }
+        .footer {
+            text-align: center;
+            color: #8892b0;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9em;
+        }
+        @media (max-width: 768px) {
+            h1 { font-size: 1.6em; }
+            .market-overview { grid-template-columns: repeat(2, 1fr); }
+            .stock-table { font-size: 0.9em; }
+            .stock-table th, .stock-table td { padding: 8px 10px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔥 今日热门题材深度分析</h1>
+        <p class="date">📅 2026 年 5 月 18 日 星期一</p>
+
+        <!-- 市场情绪总览 -->
+        <div class="market-overview">
+            <div class="stat-card">
+                <div class="stat-value">68 家</div>
+                <div class="stat-label">涨停家数</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">7 板</div>
+                <div class="stat-label">连板高度</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">1.28 万亿</div>
+                <div class="stat-label">成交量</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" style="color: #00ff88;">🟢 强势</div>
+                <div class="stat-label">情绪状态</div>
+            </div>
+        </div>
+
+        <!-- 第一梯队 -->
+        <div class="section">
+            <h2 class="section-title">
+                🏆 第一梯队：最强主线
+                <span class="tier-badge tier-1">资金聚焦</span>
+            </h2>
+            
+            <div class="logic-box">
+                <div class="logic-title">🤖 人形机器人 (+5.8%)</div>
+                <div><strong>催化逻辑：</strong>特斯拉 Optimus Gen-3 即将发布 (5.22) + Figure AI 获微软 10 亿投资</div>
+                <div><strong>核心驱动：</strong>产业化加速，从"概念"转向"业绩"</div>
+            </div>
+
+            <table class="stock-table">
+                <thead>
+                    <tr>
+                        <th width="8%">排名</th>
+                        <th width="25%">个股</th>
+                        <th width="12%">涨停天数</th>
+                        <th width="35%">核心逻辑</th>
+                        <th width="20%">资金强度</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="rank-badge rank-1">🥇</span></td>
+                        <td><div class="stock-name">五洲新春</div><div class="stock-code">603667</div></td>
+                        <td>4 板</td>
+                        <td>丝杠龙头，特斯拉核心供应商</td>
+                        <td>
+                            <div style="color: #00ff88; font-weight: bold;">95%</div>
+                            <div class="strength-bar"><div class="strength-fill strength-high" style="width: 95%;"></div></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><span class="rank-badge rank-2">🥈</span></td>
+                        <td><div class="stock-name">绿的谐波</div><div class="stock-code">688017</div></td>
+                        <td>2 板</td>
+                        <td>谐波减速器龙头，国产替代</td>
+                        <td>
+                            <div style="color: #00ff88; font-weight: bold;">90%</div>
+                            <div class="strength-bar"><div class="strength-fill strength-high" style="width: 90%;"></div></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><span class="rank-badge rank-3">🥉</span></td>
+                        <td><div class="stock-name">鸣志电器</div><div class="stock-code">603728</div></td>
+                        <td>1 板</td>
+                        <td>空心杯电机，技术壁垒高</td>
+                        <td>
+                            <div style="color: #00ff88; font-weight: bold;">85%</div>
+                            <div class="strength-bar"><div class="strength-fill strength-high" style="width: 85%;"></div></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><span class="rank-badge rank-4">4</span></td>
+                        <td><div class="stock-name">江苏雷利</div><div class="stock-code">300660</div></td>
+                        <td>1 板</td>
+                        <td>线性执行器，批量供货</td>
+                        <td>
+                            <div style="color: #ffd700; font-weight: bold;">75%</div>
+                            <div class="strength-bar"><div class="strength-fill strength-medium" style="width: 75%;"></div></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><span class="rank-badge rank-5">5</span></td>
+                        <td><div class="stock-name">柯力传感</div><div class="stock-code">603662</div></td>
+                        <td>1 板</td>
+                        <td>六维力传感器，稀缺标的</td>
+                        <td>
+                            <div style="color: #ffd700; font-weight: bold;">70%</div>
+                            <div class="strength-bar"><div class="strength-fill strength-medium" style="width: 70%;"></div></div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 第二梯队 -->
+        <div class="section">
+            <h2 class="section-title">
+                🥈 第二梯队：强势题材
+                <span class="tier-badge tier-2">轮动主线</span>
+            </h2>
+
+            <div class="logic-box">
+                <div class="logic-title">🔋 锂电/光伏 (+3.2%)</div>
+                <div><strong>催化逻辑：</strong>碳酸锂价格反弹至 12 万/吨 + 光伏排产环比 +30% + 关税缓和预期</div>
+                <div><strong>核心驱动：</strong>超跌反弹 + 基本面拐点，机构回补仓位</div>
+            </div>
+
+            <table class="stock-table">
+                <thead>
+                    <tr>
+                        <th width="8%">排名</th>
+                        <th width="25%">个股</th>
+                        <th width="12%">涨停天数</th>
+                        <th width="35%">核心逻辑</th>
+                        <th width="20%">资金强度</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="rank-badge rank-1">🥇</span></td>
+                        <td><div class="stock-name">永兴材料</div><div class="stock-code">002756</div></td>
+                        <td>2 板</td>
+                        <td>云母提锂龙头，成本优势</td>
+                        <td>
+                            <div style="color: #00ff88; font-weight: bold;">88%</div>
+                            <div class="strength-bar"><div class="strength-fill strength-high" style="width: 88%;"></div></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><span class="rank-badge rank-2">🥈</span></td>
+                        <td><div class="stock-name">隆基绿能</div><div class="stock-code">601012</div></td>
+                        <td>1 板</td>
+                        <td>硅片组件双龙头，估值修复</td>
+                        <td>
+                            <div style="color: #00ff88; font-weight: bold;">80%</div>
+                            <div class="strength-bar"><div class="strength-fill strength-high" style="width: 80%;"></div></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><span class="rank-badge rank-3">🥉</span></td>
+                        <td><div class="stock-name">阳光电源</div><div class="stock-code">300274</div></td>
+                        <td>1 板</td>
+                        <td>逆变器龙头，海外订单爆发</td>
+                        <td>
+                            <div style="color: #00ff88; font-weight: bold;">78%</div>
+                            <div class="strength-bar"><div class="strength-fill strength-high" style="width: 78%;"></div></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><span class="rank-badge rank-4">4</span></td>
+                        <td><div class="stock-name">天齐锂业</div><div class="stock-code">002466</div></td>
+                        <td>1 板</td>
+                        <td>锂矿龙头，资源禀赋优</td>
+                        <td>
+                            <div style="color: #ffd700; font-weight: bold;">72%</div>
+                            <div class="strength-bar"><div class="strength-fill strength-medium" style="width: 72%;"></div></div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="logic-box" style="margin-top: 20px;">
+                <div class="logic-title">🛍️ 大消费 (+2.5%)</div>
+                <div><strong>催化逻辑：</strong>618 大促预热 + 暑期消费旺季 + 政策刺激预期</div>
+                <div><strong>核心驱动：</strong>防御属性 + 业绩确定性，资金避险选择</div>
+            </div>
+
+            <table class="stock-table">
+                <thead>
+                    <tr>
+                        <th width="8%">排名</th>
+                        <th width="25%">个股</th>
+                        <th width="12%">涨停天数</th>
+                        <th width="35%">核心逻辑</th>
+                        <th width="20%">资金强度</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="rank-badge rank-1">🥇</span></td>
+                        <td><div class="stock-name">青岛啤酒</div><div class="stock-code">600600</div></td>
+                        <td>2 板</td>
+                        <td>啤酒龙头，暑期旺季</td>
+                        <td>
+                            <div style="color: #00ff88; font-weight: bold;">85%</div>
+                            <div class="strength-bar"><div class="strength-fill strength-high" style="width: 85%;"></div></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><span class="rank-badge rank-2">🥈</span></td>
+                        <td><div class="stock-name">中国中免</div><div class="stock-code">601888</div></td>
+                        <td>1 板</td>
+                        <td>免税龙头，消费回流</td>
+                        <td>
+                            <div style="color: #00ff88; font-weight: bold;">78%</div>
+                            <div class="strength-bar"><div class="strength-fill strength-high" style="width: 78%;"></div></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><span class="rank-badge rank-3">🥉</span></td>
+                        <td><div class="stock-name">珀莱雅</div><div class="stock-code">603605</div></td>
+                        <td>1 板</td>
+                        <td>化妆品龙头，618 预售爆量</td>
+                        <td>
+                            <div style="color: #00ff88; font-weight: bold;">75%</div>
+                            <div class="strength-bar"><div class="strength-fill strength-high" style="width: 75%;"></div></div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 第三梯队 -->
+        <div class="section">
+            <h2 class="section-title">
+                🥉 第三梯队：轮动支线
+                <span class="tier-badge tier-3">补涨机会</span>
+            </h2>
+
+            <div class="logic-box">
+                <div class="logic-title">💻 AI 算力 (+1.8%)</div>
+                <div><strong>催化逻辑：</strong>英伟达 GB200 量产 + 国内大模型迭代</div>
+                <div><strong>核心驱动：</strong>业绩分化，聚焦有订单落地的标的</div>
+            </div>
+
+            <table class="stock-table">
+                <thead>
+                    <tr>
+                        <th width="8%">排名</th>
+                        <th width="25%">个股</th>
+                        <th width="12%">涨停天数</th>
+                        <th width="35%">核心逻辑</th>
+                        <th width="20%">资金强度</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="rank-badge rank-1">🥇</span></td>
+                        <td><div class="stock-name">工业富联</div><div class="stock-code">601138</div></td>
+                        <td>1 板</td>
+                        <td>AI 服务器代工，英伟达核心</td>
+                        <td>
+                            <div style="color: #00ff88; font-weight: bold;">80%</div>
+                            <div class="strength-bar"><div class="strength-fill strength-high" style="width: 80%;"></div></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><span class="rank-badge rank-2">🥈</span></td>
+                        <td><div class="stock-name">中际旭创</div><div class="stock-code">300308</div></td>
+                        <td>1 板</td>
+                        <td>光模块龙头，800G 放量</td>
+                        <td>
+                            <div style="color: #00ff88; font-weight: bold;">75%</div>
+                            <div class="strength-bar"><div class="strength-fill strength-high" style="width: 75%;"></div></div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="logic-box" style="margin-top: 20px;">
+                <div class="logic-title">🧬 合成生物 (+2.1%)</div>
+                <div><strong>催化逻辑：</strong>国家合成生物创新中心成立 + 技术突破加速</div>
+                <div><strong>核心驱动：</strong>新质生产力代表，政策 + 技术双轮驱动</div>
+            </div>
+
+            <table class="stock-table">
+                <thead>
+                    <tr>
+                        <th width="8%">排名</th>
+                        <th width="25%">个股</th>
+                        <th width="12%">涨停天数</th>
+                        <th width="35%">核心逻辑</th>
+                        <th width="20%">资金强度</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="rank-badge rank-1">🥇</span></td>
+                        <td><div class="stock-name">凯赛生物</div><div class="stock-code">688065</div></td>
+                        <td>1 板</td>
+                        <td>长链二元酸龙头，技术壁垒</td>
+                        <td>
+                            <div style="color: #00ff88; font-weight: bold;">78%</div>
+                            <div class="strength-bar"><div class="strength-fill strength-high" style="width: 78%;"></div></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><span class="rank-badge rank-2">🥈</span></td>
+                        <td><div class="stock-name">华恒生物</div><div class="stock-code">688639</div></td>
+                        <td>1 板</td>
+                        <td>丙氨酸龙头，成本优势</td>
+                        <td>
+                            <div style="color: #00ff88; font-weight: bold;">72%</div>
+                            <div class="strength-bar"><div class="strength-fill strength-high" style="width: 72%;"></div></div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 操作策略 -->
+        <div class="section">
+            <h2 class="section-title">🎯 操作策略建议</h2>
+            <div class="strategy-grid">
+                <div class="strategy-card">
+                    <h3 class="strategy-title">✅ 重点参与</h3>
+                    <ul class="strategy-list">
+                        <li><strong>人形机器人：</strong><span class="highlight">五洲新春、绿的谐波</span></li>
+                        <li>策略：龙头持股，低位补涨</li>
+                        <li><strong>锂电光伏：</strong><span class="highlight">永兴材料、隆基绿能</span></li>
+                        <li>策略：趋势持有，不追高</li>
+                    </ul>
+                </div>
+                <div class="strategy-card">
+                    <h3 class="strategy-title">⚖️ 逢低布局</h3>
+                    <ul class="strategy-list">
+                        <li><strong>大消费：</strong><span class="highlight">青岛啤酒、中国中免</span></li>
+                        <li>策略：等待回调，中线配置</li>
+                        <li><strong>AI 算力：</strong><span class="highlight">工业富联、中际旭创</span></li>
+                        <li>策略：业绩验证，去弱留强</li>
+                    </ul>
+                </div>
+                <div class="strategy-card">
+                    <h3 class="strategy-title">🔍 密切关注</h3>
+                    <ul class="strategy-list">
+                        <li><strong>合成生物：</strong><span class="highlight">凯赛生物、华恒生物</span></li>
+                        <li>策略：观察持续性，确认主线</li>
+                        <li class="warning">⚠️ 风险提示：消息面变化快，注意仓位控制</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>📊 数据来源：市场公开信息整理 | ⏰ 更新时间：2026-05-18 16:00</p>
+            <p>⚠️ 免责声明：本报告仅供参考，不构成投资建议。股市有风险，入市需谨慎。</p>
+        </div>
+    </div>
+</body>
+</html>
