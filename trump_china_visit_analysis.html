@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>特朗普访华/中美缓和 受益与受损板块分析</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'PingFang SC', 'Microsoft YaHei', 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+            color: #e0e0e0;
+            line-height: 1.6;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            padding: 40px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+            background: linear-gradient(90deg, #00d2ff, #3a7bd5);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .header .subtitle {
+            font-size: 1.2em;
+            color: #a0a0a0;
+            margin-bottom: 10px;
+        }
+        
+        .header .date {
+            color: #888;
+            font-size: 0.9em;
+        }
+        
+        .summary-box {
+            background: linear-gradient(135deg, rgba(58, 123, 213, 0.2), rgba(0, 210, 255, 0.1));
+            border-left: 5px solid #3a7bd5;
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .summary-box h3 {
+            color: #00d2ff;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+        }
+        
+        .summary-box p {
+            color: #d0d0d0;
+            line-height: 1.8;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2em;
+            margin: 40px 0 25px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #3a7bd5;
+            display: inline-block;
+            width: 100%;
+        }
+        
+        .section-title.benefit {
+            color: #4ade80;
+            border-bottom-color: #4ade80;
+        }
+        
+        .section-title.risk {
+            color: #f87171;
+            border-bottom-color: #f87171;
+        }
+        
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 25px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .card.benefit-card {
+            border-top: 4px solid #4ade80;
+        }
+        
+        .card.risk-card {
+            border-top: 4px solid #f87171;
+        }
+        
+        .card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .card-icon {
+            font-size: 2.5em;
+            margin-right: 15px;
+        }
+        
+        .card-title {
+            font-size: 1.4em;
+            font-weight: bold;
+        }
+        
+        .benefit-card .card-title {
+            color: #4ade80;
+        }
+        
+        .risk-card .card-title {
+            color: #f87171;
+        }
+        
+        .card-logic {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            font-size: 0.95em;
+            line-height: 1.7;
+        }
+        
+        .card-logic strong {
+            color: #00d2ff;
+        }
+        
+        .stocks-list {
+            list-style: none;
+        }
+        
+        .stocks-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 0.95em;
+        }
+        
+        .stocks-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .stock-name {
+            color: #00d2ff;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+        
+        .stock-code {
+            color: #888;
+            font-size: 0.85em;
+            margin-right: 8px;
+        }
+        
+        .stock-reason {
+            color: #b0b0b0;
+            font-size: 0.9em;
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 40px 0;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 15px;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+        
+        .comparison-table th {
+            background: linear-gradient(90deg, rgba(58, 123, 213, 0.3), rgba(0, 210, 255, 0.2));
+            padding: 18px 15px;
+            text-align: left;
+            font-weight: bold;
+            color: #00d2ff;
+            font-size: 1.1em;
+        }
+        
+        .comparison-table td {
+            padding: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            color: #d0d0d0;
+        }
+        
+        .comparison-table tr:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+        
+        .comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .strategy-box {
+            background: linear-gradient(135deg, rgba(255, 193, 7, 0.15), rgba(255, 152, 0, 0.1));
+            border: 2px solid #ffc107;
+            border-radius: 15px;
+            padding: 30px;
+            margin-top: 40px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .strategy-box h3 {
+            color: #ffc107;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+            text-align: center;
+        }
+        
+        .strategy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        
+        .strategy-item {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #ffc107;
+        }
+        
+        .strategy-item h4 {
+            color: #00d2ff;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        
+        .strategy-item p {
+            color: #c0c0c0;
+            line-height: 1.7;
+            font-size: 0.95em;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 30px;
+            color: #888;
+            font-size: 0.9em;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+            
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .comparison-table {
+                font-size: 0.85em;
+            }
+            
+            .comparison-table th,
+            .comparison-table td {
+                padding: 10px 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 头部 -->
+        <div class="header">
+            <h1>🇺🇸 特朗普访华/中美缓和</h1>
+            <div class="subtitle">受益与受损板块深度分析</div>
+            <div class="date">📅 更新时间：2026-05-18</div>
+        </div>
+        
+        <!-- 核心观点 -->
+        <div class="summary-box">
+            <h3>💡 核心逻辑</h3>
+            <p>
+                <strong>特朗普访华/中美关系缓和</strong> 的核心交易逻辑是<strong>"贸易战降温"</strong>。
+                这将导致市场资金从<strong>"对抗受益"</strong>板块（军工、稀土、国产替代）流向<strong>"合作受益"</strong>板块
+                （消费电子、航运、CXO、光伏出口）。<br><br>
+                <strong>操作策略：</strong>做多"合作"，做空"对抗"。短期回避纯安全逻辑，中线布局有业绩支撑的出口龙头。
+            </p>
+        </div>
+        
+        <!-- 受益板块 -->
+        <h2 class="section-title benefit">✅ 受益方向 (做多)</h2>
+        <div class="cards-grid">
+            <div class="card benefit-card">
+                <div class="card-header">
+                    <span class="card-icon">🚜</span>
+                    <span class="card-title">农业/大豆</span>
+                </div>
+                <div class="card-logic">
+                    <strong>利好逻辑：</strong>中美贸易摩擦缓和，中国重启采购美国大豆，农业出口情绪受益，土地增值预期提升。
+                </div>
+                <ul class="stocks-list">
+                    <li><span class="stock-name">北大荒</span><span class="stock-code">600598</span><span class="stock-reason">国内最大农业种植企业</span></li>
+                    <li><span class="stock-name">隆平高科</span><span class="stock-code">000998</span><span class="stock-reason">种业龙头，杂交水稻全球领先</span></li>
+                    <li><span class="stock-name">登海种业</span><span class="stock-code">002041</span><span class="stock-reason">玉米种业龙头</span></li>
+                    <li><span class="stock-name">大北农</span><span class="stock-code">002385</span><span class="stock-reason">饲料 + 种业双轮驱动</span></li>
+                </ul>
+            </div>
+            
+            <div class="card benefit-card">
+                <div class="card-header">
+                    <span class="card-icon">📱</span>
+                    <span class="card-title">消费电子/苹果链</span>
+                </div>
+                <div class="card-logic">
+                    <strong>利好逻辑：</strong>中美关系缓和利好出口型消费电子企业，关税压力减轻，海外订单预期改善。
+                </div>
+                <ul class="stocks-list">
+                    <li><span class="stock-name">立讯精密</span><span class="stock-code">002475</span><span class="stock-reason">苹果产业链龙头</span></li>
+                    <li><span class="stock-name">歌尔股份</span><span class="stock-code">002241</span><span class="stock-reason">声学 + VR 设备</span></li>
+                    <li><span class="stock-name">蓝思科技</span><span class="stock-code">300433</span><span class="stock-reason">消费电子玻璃盖板</span></li>
+                    <li><span class="stock-name">领益智造</span><span class="stock-code">002600</span><span class="stock-reason">精密功能件</span></li>
+                </ul>
+            </div>
+            
+            <div class="card benefit-card">
+                <div class="card-header">
+                    <span class="card-icon">🚢</span>
+                    <span class="card-title">航运/港口</span>
+                </div>
+                <div class="card-logic">
+                    <strong>利好逻辑：</strong>贸易量预期提升，集装箱运输和港口直接受益，运价有望企稳回升。
+                </div>
+                <ul class="stocks-list">
+                    <li><span class="stock-name">中远海控</span><span class="stock-code">601919</span><span class="stock-reason">集运龙头，运力全球前三</span></li>
+                    <li><span class="stock-name">招商轮船</span><span class="stock-code">601872</span><span class="stock-reason">油运 + 散货多元布局</span></li>
+                    <li><span class="stock-name">上港集团</span><span class="stock-code">600018</span><span class="stock-reason">上海港运营，全球第一大港</span></li>
+                    <li><span class="stock-name">宁波港</span><span class="stock-code">601018</span><span class="stock-reason">宁波港运营</span></li>
+                </ul>
+            </div>
+            
+            <div class="card benefit-card">
+                <div class="card-header">
+                    <span class="card-icon">🔋</span>
+                    <span class="card-title">新能源/光伏</span>
+                </div>
+                <div class="card-logic">
+                    <strong>利好逻辑：</strong>若关税壁垒降低，光伏出口美国有望恢复增长，超跌板块迎来估值修复。
+                </div>
+                <ul class="stocks-list">
+                    <li><span class="stock-name">隆基绿能</span><span class="stock-code">601012</span><span class="stock-reason">光伏硅片 + 组件龙头</span></li>
+                    <li><span class="stock-name">晶科能源</span><span class="stock-code">688223</span><span class="stock-reason">组件出口占比高</span></li>
+                    <li><span class="stock-name">天合光能</span><span class="stock-code">688599</span><span class="stock-reason">组件 + 储能</span></li>
+                    <li><span class="stock-name">阳光电源</span><span class="stock-code">300274</span><span class="stock-reason">逆变器龙头</span></li>
+                </ul>
+            </div>
+            
+            <div class="card benefit-card">
+                <div class="card-header">
+                    <span class="card-icon">💊</span>
+                    <span class="card-title">医药/CXO</span>
+                </div>
+                <div class="card-logic">
+                    <strong>利好逻辑：</strong>中美医药合作深化，CXO 企业海外订单有望恢复，海外收入占比高的企业弹性最大。
+                </div>
+                <ul class="stocks-list">
+                    <li><span class="stock-name">药明康德</span><span class="stock-code">603259</span><span class="stock-reason">CXO 龙头，海外收入占比超 60%</span></li>
+                    <li><span class="stock-name">凯莱英</span><span class="stock-code">002821</span><span class="stock-reason">CDMO 龙头</span></li>
+                    <li><span class="stock-name">泰格医药</span><span class="stock-code">300347</span><span class="stock-reason">临床 CRO 龙头</span></li>
+                    <li><span class="stock-name">康龙化成</span><span class="stock-code">300759</span><span class="stock-reason">全流程 CXO</span></li>
+                </ul>
+            </div>
+            
+            <div class="card benefit-card">
+                <div class="card-header">
+                    <span class="card-icon">🏭</span>
+                    <span class="card-title">机械制造/出口</span>
+                </div>
+                <div class="card-logic">
+                    <strong>利好逻辑：</strong>关税降低利好机械出口企业，海外需求复苏带动订单增长。
+                </div>
+                <ul class="stocks-list">
+                    <li><span class="stock-name">三一重工</span><span class="stock-code">600031</span><span class="stock-reason">工程机械龙头</span></li>
+                    <li><span class="stock-name">徐工机械</span><span class="stock-code">000425</span><span class="stock-reason">起重机龙头</span></li>
+                    <li><span class="stock-name">中联重科</span><span class="stock-code">000157</span><span class="stock-reason">工程机械 + 农机</span></li>
+                    <li><span class="stock-name">恒立液压</span><span class="stock-code">601100</span><span class="stock-reason">液压件龙头</span></li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- 受损板块 -->
+        <h2 class="section-title risk">❌ 受损方向 (回避/做空)</h2>
+        <div class="cards-grid">
+            <div class="card risk-card">
+                <div class="card-header">
+                    <span class="card-icon">🛡️</span>
+                    <span class="card-title">军工/国防</span>
+                </div>
+                <div class="card-logic">
+                    <strong>利空逻辑：</strong>地缘紧张缓解，装备 urgency 下降，订单预期减弱。资金从防御板块流向进攻板块。
+                </div>
+                <ul class="stocks-list">
+                    <li><span class="stock-name">中航沈飞</span><span class="stock-code">600760</span><span class="stock-reason">战斗机龙头，地缘敏感度高</span></li>
+                    <li><span class="stock-name">中航西飞</span><span class="stock-code">000768</span><span class="stock-reason">轰炸机/运输机龙头</span></li>
+                    <li><span class="stock-name">洪都航空</span><span class="stock-code">600316</span><span class="stock-reason">教练机 + 导弹概念</span></li>
+                    <li><span class="stock-name">中兵红箭</span><span class="stock-code">000519</span><span class="stock-reason">陆军装备 + 人造钻石</span></li>
+                </ul>
+            </div>
+            
+            <div class="card risk-card">
+                <div class="card-header">
+                    <span class="card-icon">💎</span>
+                    <span class="card-title">稀土/战略金属</span>
+                </div>
+                <div class="card-logic">
+                    <strong>利空逻辑：</strong>反制手段弱化，出口限制预期落空，价格支撑减弱。美国可能重启其他稀土来源。
+                </div>
+                <ul class="stocks-list">
+                    <li><span class="stock-name">北方稀土</span><span class="stock-code">600111</span><span class="stock-reason">轻稀土龙头，占比最大</span></li>
+                    <li><span class="stock-name">中国稀土</span><span class="stock-code">000831</span><span class="stock-reason">重稀土龙头</span></li>
+                    <li><span class="stock-name">盛和资源</span><span class="stock-code">600392</span><span class="stock-reason">稀土 + 锆钛</span></li>
+                    <li><span class="stock-name">金力永磁</span><span class="stock-code">300748</span><span class="stock-reason">稀土永磁材料</span></li>
+                </ul>
+            </div>
+            
+            <div class="card risk-card">
+                <div class="card-header">
+                    <span class="card-icon">💻</span>
+                    <span class="card-title">国产替代 (硬科技)</span>
+                </div>
+                <div class="card-logic">
+                    <strong>利空逻辑：</strong>外部封锁放松，国产替代紧迫性下降，估值逻辑受损。市场重新审视"必要性"和"溢价"。
+                </div>
+                <ul class="stocks-list">
+                    <li><span class="stock-name">中芯国际</span><span class="stock-code">688981</span><span class="stock-reason">晶圆代工，受制裁影响大</span></li>
+                    <li><span class="stock-name">海光信息</span><span class="stock-code">688041</span><span class="stock-reason">国产 CPU/DCU</span></li>
+                    <li><span class="stock-name">龙芯中科</span><span class="stock-code">688047</span><span class="stock-reason">自主指令集 CPU</span></li>
+                    <li><span class="stock-name">北方华创</span><span class="stock-code">002371</span><span class="stock-reason">半导体设备龙头</span></li>
+                </ul>
+            </div>
+            
+            <div class="card risk-card">
+                <div class="card-header">
+                    <span class="card-icon">🌾</span>
+                    <span class="card-title">农业 (种植业)</span>
+                </div>
+                <div class="card-logic">
+                    <strong>利空逻辑：</strong>若大量进口美国廉价大豆/玉米，国内农产品价格承压，压缩种植企业利润空间。
+                </div>
+                <ul class="stocks-list">
+                    <li><span class="stock-name">苏垦农发</span><span class="stock-code">601952</span><span class="stock-reason">水稻/小麦种植，受进口粮价影响</span></li>
+                    <li><span class="stock-name">北大荒</span><span class="stock-code">600598</span><span class="stock-reason">双刃剑：土地增值 vs 粮价下跌</span></li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- 对比表格 -->
+        <h2 class="section-title">📊 受益 vs 受损 对比表</h2>
+        <table class="comparison-table">
+            <thead>
+                <tr>
+                    <th>维度</th>
+                    <th>受益方向 (做多)</th>
+                    <th>受损方向 (回避/做空)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>核心逻辑</strong></td>
+                    <td>合作、贸易量增、关税降</td>
+                    <td>对抗减弱、替代紧迫性降</td>
+                </tr>
+                <tr>
+                    <td><strong>典型板块</strong></td>
+                    <td>消费电子、航运、CXO、光伏</td>
+                    <td>军工、稀土、半导体设备</td>
+                </tr>
+                <tr>
+                    <td><strong>资金流向</strong></td>
+                    <td>进攻型 (成长/周期)</td>
+                    <td>防御型 (安全/自主)</td>
+                </tr>
+                <tr>
+                    <td><strong>估值变化</strong></td>
+                    <td>修复 (PE 扩张)</td>
+                    <td>回调 (杀估值)</td>
+                </tr>
+                <tr>
+                    <td><strong>操作策略</strong></td>
+                    <td>逢低布局龙头</td>
+                    <td>逢高减仓、回避纯概念</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <!-- 操作策略 -->
+        <div class="strategy-box">
+            <h3>🎯 操作策略建议</h3>
+            <div class="strategy-grid">
+                <div class="strategy-item">
+                    <h4>✅ 买入方向</h4>
+                    <p>苹果链 (立讯精密、歌尔股份)、航运 (中远海控)、CXO (药明康德)、光伏出口 (隆基绿能、阳光电源)。优先选择有业绩支撑的核心龙头。</p>
+                </div>
+                <div class="strategy-item">
+                    <h4>❌ 卖出/回避</h4>
+                    <p>军工 (中航沈飞、中航西飞)、稀土 (北方稀土、中国稀土)、纯国产替代概念。短期资金流出，回避纯"安全"逻辑。</p>
+                </div>
+                <div class="strategy-item">
+                    <h4>⚖️ 仓位控制</h4>
+                    <p>单题材不超过 3 成仓位，总仓位控制在 5 成以内。设置好止损位，避免追高，等待回调低吸。</p>
+                </div>
+                <div class="strategy-item">
+                    <h4>🔍 跟踪要点</h4>
+                    <p>密切关注官方消息和实际政策落地情况。区分"真替代"与"炒概念"，长期逻辑不变的优质标的回调是机会。</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 风险提示 -->
+        <div class="summary-box" style="margin-top: 30px; border-left-color: #f87171; background: linear-gradient(135deg, rgba(248, 113, 113, 0.2), rgba(255, 0, 0, 0.1));">
+            <h3 style="color: #f87171;">⚠️ 重要风险提示</h3>
+            <p>
+                1. <strong>消息核实：</strong>特朗普目前并非美国总统，"访华"可能是市场预期或竞选言论，需核实真实性。<br>
+                2. <strong>事件驱动：</strong>此类消息通常是短期炒作，注意"见光死"风险，快进快出。<br>
+                3. <strong>消息面变化快：</strong>需及时跟踪最新进展，灵活调整策略。<br>
+                4. <strong>结合大盘环境：</strong>若大盘走弱，即使利好板块也可能补跌，注意整体仓位控制。
+            </p>
+        </div>
+        
+        <!-- 页脚 -->
+        <div class="footer">
+            <p>📈 特朗普访华/中美缓和 受益与受损板块分析</p>
+            <p>⏰ 数据更新时间：2026-05-18 15:58</p>
+            <p>💡 投资有风险，入市需谨慎。本报告仅供参考，不构成投资建议。</p>
+        </div>
+    </div>
+</body>
+</html>
