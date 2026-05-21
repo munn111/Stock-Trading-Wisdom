@@ -68,3 +68,5 @@ strategy.check_pattern("sh.603667")  # 五洲新春
 
 ## 🔐 安全提示
 本项目仅供学习交流，不构成投资建议。股市有风险，入市需谨慎。
+
+- **📘 交易方法论**: [主线识别与错杀博弈 (2026-W21)](methodology_weekly_review.md)
