@@ -1,7 +1,7 @@
 ---
 name: stock-trading-wisdom
 description: "A股交易方���论与实战技能核心库 v3.0 — 涨停板战法、龙头战法、卡脖子选股、六维选股、云赛同款形态、情绪周期、每日工作流SOP、报告三件套规范、数据工具踩坑集。触发词：股票分析、A股、涨停、龙头战法、选股、复盘、情绪周期、卡脖子、打板、连板、龙虎榜。Do NOT trigger on: 美股分析、港股分析、加密货币、期货（这些应走其他专用skill）。"
-version: 3.0.0
+version: 3.1.0
 allowed-tools: Bash,Read,Write,Edit,Glob,Grep,WebSearch,WebFetch,Skill
 metadata:
   clawdbot:
@@ -109,7 +109,24 @@ examples/   — 案例库
 - [docs/09_数据工具实战踩坑集.md](docs/09_数据工具实战踩坑集.md) — 踩坑速查
 - [docs/10_每日工作流实战演进.md](docs/10_每日工作流实战演进.md) — 工作流
 - [memory/emotion_cycle.md](memory/emotion_cycle.md) — 情绪周期
-- [skills/analysis_sop.md](skills/analysis_sop.md) — 分析SOP
+- [skills/analysis_sop.md](skills/analysis_sop.md) — 分析SOP（v3.1 连板天梯四维结构化）
+- [skills/analysis_sop.md#21-连板天梯结构化v31-新增--核心升级](skills/analysis_sop.md#21-连板天梯结构化v31-新增--核心升级) — 连板天梯使用指南【v3.1 必读】
+
+---
+
+## v3.1 核心升级：连板天梯
+
+涨停复盘从一维列表升级为**四维结构化**：
+1. **全市场主线分布表** — 涨停数/占比/龙头，一眼看共识
+2. **连板天梯时间戳表** — 每只连板股标注涨停时间到分钟
+3. **涨停时间分级诊断** — 早盘秒板(强) → 尾盘封板(弱信号)
+4. **连板板块归属树** — 涨停全量按主线分叉展示
+5. **梯队健康度诊断** — 每条主线独立评估
+
+基本判断法则：
+- **尾盘封板率 >30% = 警惕次日高开低走**
+- **09:30-09:45涨停的连板股，次日继续涨停概率 >> 14:00后涨停的**
+- **主线涨停合计 >30% = 共识形成；<20% = 无主线混乱期**
 
 ---
 
