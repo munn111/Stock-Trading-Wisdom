@@ -108,6 +108,8 @@ examples/   — 案例库
 
 配色：背景#070b16 | 涨红#ff5a5f | 跌绿#1ed760 | 强调#00d4ff
 
+> 实操工具链见 → [docs/11_三件套生成工具链.md](docs/11_三件套生成工具链.md) (HTML翻页模板 + PPTX生成脚本 + 完整SOP)
+
 ## 数据源
 
 | 数据 | 首选 | 备选 |
@@ -146,7 +148,9 @@ examples/   — 案例库
 
 - [README.md](README.md) — 完整项目说明
 - [methods/04_leader_playbook_2026W29.md](methods/04_leader_playbook_2026W29.md) — 龙头战法总纲(最重要)
-- [docs/08_报告输出三件套规范.md](docs/08_报告输出三件套规范.md) — 报告规范
+- [docs/08_报告输出三件套规范.md](docs/08_报告输出三件套规范.md) — 报告规范 (配色/命名/检查清单)
+- [docs/11_三件套生成工具链.md](docs/11_三件套生成工具链.md) — ★ 三件套实操手册 (HTML翻页模板+PPTX生成脚本+完整SOP)
+- [scripts/build_pptx_template.py](scripts/build_pptx_template.py) — PPTX 生成可复用模板 (复制→填内容→运行)
 - [docs/09_数据工具实战踩坑集.md](docs/09_数据工具实战踩坑集.md) — 踩坑速查
 - [docs/10_每日工作流实战演进.md](docs/10_每日工作流实战演进.md) — 工作流
 - [memory/emotion_cycle.md](memory/emotion_cycle.md) — 情绪周期
