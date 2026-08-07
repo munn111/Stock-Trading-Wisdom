@@ -148,6 +148,7 @@ examples/   — 案例库
 
 - [README.md](README.md) — 完整项目说明
 - [methods/04_leader_playbook_2026W29.md](methods/04_leader_playbook_2026W29.md) — 龙头战法总纲(最重要)
+- [methods/08_选股战法全库.md](methods/08_选股战法全库.md) — ★ 22种选股战法大全 (趋势/形态/事件/基本面/资金面/特殊环境全覆盖)
 - [docs/08_报告输出三件套规范.md](docs/08_报告输出三件套规范.md) — 报告规范 (配色/命名/检查清单)
 - [docs/11_三件套生成工具链.md](docs/11_三件套生成工具链.md) — ★ 三件套实操手册 (HTML翻页模板+PPTX生成脚本+完整SOP)
 - [scripts/build_pptx_template.py](scripts/build_pptx_template.py) — PPTX 生成可复用模板 (复制→填内容→运行)
