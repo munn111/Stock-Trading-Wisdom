@@ -1,7 +1,7 @@
 ---
 name: stock-trading-wisdom
-description: "A股交易方法论与实战技能核心库 v3.2 — 涨停板战法、龙头战法、卡脖子选股、六维选股、云赛同款形态、情绪周期、每日工作流SOP、报告三件套规范、数据工具踩坑集、7月极端行情实战心得。触发词：股票分析、A股、涨停、龙头战法、选股、复盘、情绪周期、卡脖子、打板、连板、龙虎榜。Do NOT trigger on: 美股分析、港股分析、加密货币、期货（这些应走其他专用skill）。"
-version: 3.2.0
+description: "A股交易方法论与实战技能核心库 v3.3 — 涨停板战法、龙头战法、卡脖子选股、六维选股、云赛同款形态、情绪周期、每日工作流SOP、报告三件套规范、数据工具踩坑集、7月极端行情实战心得、GitHub开源项目深度整合分析（ashare-sop/youzi-trading/1to2三系统融合）。触发词：股票分析、A股、涨停、龙头战法、选股、复盘、情绪周期、卡脖子、打板、连板、龙虎榜。Do NOT trigger on: 美股分析、港股分析、加密货币、期货（这些应走其他专用skill）。"
+version: 3.3.0
 allowed-tools: Bash,Read,Write,Edit,Glob,Grep,WebSearch,WebFetch,Skill
 metadata:
   clawdbot:
@@ -144,6 +144,25 @@ examples/   — 案例库
 5. 产出三件套：MD + HTML + PPT
 ```
 
+## v3.3 升级：GitHub 开源项目深度整合分析（2026-08-08）
+
+深度分析了三大 GitHub 开源交易项目，提出 STW v4.0 融合架构：
+
+**三大项目**：
+- **gordon8018/ashare-sop-engine**（v1.7）：四层标准化决策引擎，L1 闸门回测验证（D5 超额 ×26.5倍），L3 9条量化规则（全市场6,839只验证，t>4.9）
+- **AIPMAndy/youzi-trading-skill**（v2.0）：23位游资心法系统化为八大流派 + 硬软规则分层 + 三大实战战法
+- **lpw821/a-stock-1to2**（v1.0）：1进2打板专用，11维度100分量化评分 + 六种高胜率模式 + 同营业部强庄识别
+
+**核心融合成果**：
+- L1 双系统交叉验证闸门（ashare-sop MA均线 + youzi 赚钱效应，分歧取更保守）
+- L2 三验证题材引擎（ashare-sop 动态识别 + youzi 龙头三要素 + 1to2 板块权重）
+- L3 三层加权评分公式：buy_score×30% + 11维×40% + 战法匹配×30%
+- L4 风控统一取交集（仓位/止损/冷却/熔断）
+- 规则映射表（buy_score每条 ↔ youzi战法 ↔ 1to2维度 · 1to2六种模式 ↔ ashare-sop四阶段 ↔ youzi战法）
+- 融合实战场景3例 + 每日速查卡 + STW v4.0 三阶段实施计划（8-13天）
+
+详见: docs/12_三大交易系统深度整合分析.md
+
 ## 参考文件
 
 - [README.md](README.md) — 完整项目说明
@@ -155,6 +174,7 @@ examples/   — 案例库
 - [docs/09_数据工具实战踩坑集.md](docs/09_数据工具实战踩坑集.md) — 踩坑速查
 - [docs/10_每日工作流实战演进.md](docs/10_每日工作流实战演进.md) — 工作流
 - [memory/emotion_cycle.md](memory/emotion_cycle.md) — 情绪周期
+- [docs/12_三大交易系统深度整合分析.md](docs/12_三大交易系统深度整合分析.md) — ★ v3.3 核心新增：三大GitHub开源系统融合分析（ashare-sop + youzi-trading + 1to2 → STW v4.0 融合决策链）
 - [skills/analysis_sop.md](skills/analysis_sop.md) — 分析SOP（v3.1 连板天梯四维结构化）
 - [skills/analysis_sop.md#21-连板天梯结构化v31-新增--核心升级](skills/analysis_sop.md#21-连板天梯结构化v31-新增--核心升级) — 连板天梯使用指南【v3.1 必读】
 
