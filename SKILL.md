@@ -1,7 +1,7 @@
 ---
 name: stock-trading-wisdom
-description: "A股交易方法论与实战技能核心库 v3.4 — 涨停板战法、龙头战法、卡脖子选股、六维选股、云赛同款形态、情绪周期、每日工作流SOP、报告三件套规范、数据工具踩坑集、7月极端行情实战心得、GitHub开源项目深度整合分析、三系统融合决策方法论（L1双闸门+L2三验证+L3三层加权+L4统一风控）。触发词：股票分析、A股、涨停、龙头战法、选股、复盘、情绪周期、卡脖子、打板、连板、龙虎榜。Do NOT trigger on: 美股分析、港股分析、加密货币、期货（这些应走其他专用skill）。"
-version: 3.4.0
+description: "A股交易方法论与实战技能核心库 v3.4 — 涨停板战法、龙头战法、卡脖子选股、六维选股、云赛同款形态、情绪周期、每日工作流SOP、报告三件套规范、数据工具踩坑集、7月极端行情实战心得、GitHub开源项目深度整合分析、三系统融合决策方法论（L1双闸门+L2三验证+L3三层加权+L4统一风控）、短线冲高选股（筹码分歧回补）、A股抖音口播（五框架+三模板）。触发词：股票分析、A股、涨停、龙头战法、选股、复盘、情绪周期、卡脖子、打板、连板、龙虎榜。Do NOT trigger on: 美股分析、港股分析、加密货币、期货（这些应走其他专用skill）。"
+version: 3.5.0
 allowed-tools: Bash,Read,Write,Edit,Glob,Grep,WebSearch,WebFetch,Skill
 metadata:
   clawdbot:
@@ -15,7 +15,7 @@ display_name_en: "Stock Trading Wisdom"
 agent_created: true
 ---
 
-# Stock Trading Wisdom v3.2 — A股交易方法论与实战技能核心库
+# Stock Trading Wisdom v3.5 — A股交易方法论与实战技能核心库
 
 > 定位：WorkBuddy 股票分析核心技能，所有A股分析请求的默认入口
 
@@ -181,6 +181,13 @@ examples/   — 案例库
 - 常见问题 FAQ（4个）
 - 四个铁律 + 完整决策链
 
+## v3.5 升级：短线选股 + 内容产出双能力（2026-09-21）
+
+**新技能与方法论**：
+- **短线冲高选股**：`skills/chip-reversal-stock-picker/` + `docs/14_短线冲高选股与交易方法论.md` — 筹码分歧回补6条件、四维度共振分级、竞价抢筹3情景、主力成本线4价位、健康吸筹/高位派发镜像判据（中天科技实战）
+- **A股抖音口播**：`skills/a-share-douyin-koubo/` + `docs/15_A股抖音口播方法论.md` — 五框架（流动性档位/通胀剪刀差/冲锋号/跨境支付/一日五步）+ 三模板（盘前/午间/盘后）+ 写作纪律
+- **情绪周期校准**：`memory/emotion_cycle.md` 补充 9 月涨停序列（9/8 73 → 9/15 32 冰点 → 9/16 91 冰点反转 → 9/21 105 高潮无高度）
+
 ## 参考文件
 
 - [README.md](README.md) — 完整项目说明
@@ -194,6 +201,8 @@ examples/   — 案例库
 - [memory/emotion_cycle.md](memory/emotion_cycle.md) — 情绪周期
 - [docs/12_三大交易系统深度整合分析.md](docs/12_三大交易系统深度整合分析.md) — ★ v3.3 核心新增：三大GitHub开源系统融合分析（ashare-sop + youzi-trading + 1to2 → STW v4.0 融合决策链）
 - [docs/13_三系统融合决策方法论.md](docs/13_三系统融合决策方法论.md) — ★ v3.4 核心新增：独立可执行的方法论文档（L1双闸门+L2三验证+L3三层加权+L4统一风控 · 每日操作SOP · 实战案例）
+- [docs/14_短线冲高选股与交易方法论.md](docs/14_短线冲高选股与交易方法论.md) — ★ v3.5 新增：筹码分歧回补6条件+四维共振+竞价抢筹+主力成本线
+- [docs/15_A股抖音口播方法论.md](docs/15_A股抖音口播方法论.md) — ★ v3.5 新增：五框架+三模板+写作纪律
 - [skills/analysis_sop.md](skills/analysis_sop.md) — 分析SOP（v3.1 连板天梯四维结构化）
 - [skills/analysis_sop.md#21-连板天梯结构化v31-新增--核心升级](skills/analysis_sop.md#21-连板天梯结构化v31-新增--核心升级) — 连板天梯使用指南【v3.1 必读】
 

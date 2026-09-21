@@ -1,6 +1,6 @@
 # Stock Trading Wisdom · 文档索引
 
-> v3.0 (2026-07-29)
+> v3.5 (2026-09-21)
 
 ---
 
@@ -33,6 +33,8 @@
 | 11_三件套生成工具链.md | python-pptx/HTML生成工具链 | v3.0 |
 | 12_三大交易系统深度整合分析.md | ashare-sop+youzi+a-stock-1to2融合架构 | v3.2 |
 | 13_交易认知综合心得_博弈结构与纪律闭环.md | ⭐ 市场微观结构+板块生命周期+神明叙事+人性工程化+纪律闭环 | v3.3 NEW |
+| 14_短线冲高选股与交易方法论.md | ⭐ 筹码分歧回补6条件+四维共振+竞价抢筹+主力成本线 | v3.5 NEW |
+| 15_A股抖音口播方法论.md | ⭐ 五框架+三模板+写作纪律（自媒体口播产出） | v3.5 NEW |
 
 ### 系统模块
 | 文件 | 内容 |
@@ -40,6 +42,8 @@
 | memory/emotion_cycle.md | 情绪周期四阶段(7月校准版) |
 | skills/analysis_sop.md | 分析SOP(5大流程+选股框架) |
 | skills/daily-panqian-report/SKILL.md | 每日盘前报告方法论 |
+| skills/chip-reversal-stock-picker/SKILL.md | 短线冲高选股（筹码分歧回补） |
+| skills/a-share-douyin-koubo/SKILL.md | A股抖音口播（五框架+三模板） |
 | strategies/ | 策略引擎Python代码 |
 | data_engine/ | 数据引擎 |
 | examples/ | 经典案例 |
@@ -75,4 +79,4 @@
 
 ---
 
-> *索引更新于 2026-08-09*
+> *索引更新于 2026-09-21*
